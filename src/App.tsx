@@ -1,11 +1,11 @@
 import { nanoid } from "nanoid";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { taskParams } from "./types/Task";
+import { TaskParams } from "./types/Task";
 import TaskBoard from "./TaskBoard";
 import { useState } from "react";
 
-const softwareDevelopmentTasks: taskParams[] = [
+const softwareDevelopmentTasks: TaskParams[] = [
   {
     title: "Homepage Design",
     description: "Create a responsive homepage layout",
@@ -68,7 +68,7 @@ const softwareDevelopmentTasks: taskParams[] = [
   },
 ];
 
-const initialTask: taskParams[] = [];
+const initialTask: TaskParams[] = [];
 softwareDevelopmentTasks.forEach((task) => {
   initialTask.push({
     ...task,
@@ -77,11 +77,11 @@ softwareDevelopmentTasks.forEach((task) => {
 });
 
 function App() {
-  const [task, setTask] = useState<taskParams[]>(initialTask);
+  const [task, setTask] = useState<TaskParams[]>(initialTask);
   return (
     <>
       <h1 className="text-center">Task Manager</h1>
-      <TaskBoard task={task} setTask={setTask} />
+      <TaskBoard key={nanoid()} task={task} setTask={setTask} />
     </>
   );
 }

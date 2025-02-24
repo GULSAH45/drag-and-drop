@@ -1,11 +1,11 @@
 import { Row, Col } from "react-bootstrap";
 import { Droppable } from "@hello-pangea/dnd";
-import { taskParams } from "./types/Task";
+import { TaskParams } from "./types/Task";
 import TaskCard from "./TaskCard";
 
 interface TaskColumnProps {
   status: string;
-  task: taskParams[];
+  task: TaskParams[];
 }
 
 function TaskColumn({ status, task }: TaskColumnProps) {
@@ -20,7 +20,7 @@ function TaskColumn({ status, task }: TaskColumnProps) {
               {...provided.droppableProps}
               style={{ minHeight: "400px" }}
             >
-              {softwareDevelopmentTasks.map((task, index) => (
+              {task.map((task, index) => (
                 <TaskCard key={task.id} task={task} index={index} />
               ))}
               {provided.placeholder}

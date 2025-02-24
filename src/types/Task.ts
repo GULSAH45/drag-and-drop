@@ -1,4 +1,4 @@
-export interface taskParams {
+export interface TaskParams {
     id?: string;
     title: string;
     description: string;

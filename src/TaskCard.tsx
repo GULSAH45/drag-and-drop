@@ -1,9 +1,9 @@
 import { Card } from "react-bootstrap";
-import { taskParams } from "./types/Task";
+import { TaskParams } from "./types/Task";
 import { Draggable } from "@hello-pangea/dnd";
 
 interface TaskCardProps {
-  task: taskParams;
+  task: TaskParams;
   index: number;
 }
 
