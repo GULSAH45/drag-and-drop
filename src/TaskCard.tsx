@@ -10,7 +10,7 @@ interface TaskCardProps {
 function TaskCard({ task, index }: TaskCardProps) {
   return (
     <>
-      <Draggable draggableId={task.id} index={index}>
+      <Draggable draggableId={String(task.id)} index={index}>
         {(provided) => (
           <Card
             style={{ width: "18rem" }}

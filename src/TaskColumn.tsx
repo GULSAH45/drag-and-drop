@@ -5,22 +5,22 @@ import TaskCard from "./TaskCard";
 
 interface TaskColumnProps {
   status: string;
-  task: TaskParams[];
+  tasks: TaskParams[]; // task yerine tasks olarak güncellendi
 }
 
-function TaskColumn({ status, task }: TaskColumnProps) {
+function TaskColumn({ status, tasks }: TaskColumnProps) {
   return (
-    <Row>
-      <Col>
+    <Row className=" justify-content-center">
+      <Col md={4} sm={6}>
         <h4>{status}</h4>
         <Droppable droppableId={status}>
           {(provided) => (
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
-              style={{ minHeight: "400px" }}
+              className="task-column"
             >
-              {task.map((task, index) => (
+              {tasks.map((task, index) => (
                 <TaskCard key={task.id} task={task} index={index} />
               ))}
               {provided.placeholder}

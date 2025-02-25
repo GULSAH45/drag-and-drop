@@ -81,7 +81,7 @@ function App() {
   return (
     <>
       <h1 className="text-center">Task Manager</h1>
-      <TaskBoard key={nanoid()} task={task} setTask={setTask} />
+      <TaskBoard key={nanoid()} tasks={task} setTask={setTask} />
     </>
   );
 }
