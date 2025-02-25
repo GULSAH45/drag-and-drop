@@ -1,1 +1,175 @@
+// Elegant color palette
+$primary-color: #2c3e50;
+$secondary-color: #34495e;
+$accent-color: #8e44ad;
+$light-gray: #f5f6fa;
+$border-color: #dcdde1;
+$text-primary: #2c3e50;
+$text-secondary: #576574;
+$success-color: #10ac84;
+$card-shadow: rgba(0, 0, 0, 0.1);
 
+body {
+  background-color: $light-gray;
+  color: $text-primary;
+  min-height: 100vh;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+h1 {
+  color: $primary-color;
+  font-weight: 300;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  letter-spacing: 0.5px;
+}
+
+.newTaskInput {
+  width: 50%;
+  margin: 0 auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px $card-shadow;
+  
+  .form-group {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    color: $text-secondary;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .form-control {
+    background: white;
+    border: 1px solid $border-color;
+    color: $text-primary;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    padding: 0.75rem;
+
+    &:focus {
+      border-color: $accent-color;
+      box-shadow: 0 0 0 2px rgba($accent-color, 0.1);
+      outline: none;
+    }
+
+    &::placeholder {
+      color: lighten($text-secondary, 20%);
+    }
+  }
+
+  .btn-primary {
+    background: $accent-color;
+    border: none;
+    padding: 0.75rem 2rem;
+    font-weight: 500;
+    display: block;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    
+    &:hover {
+      background: darken($accent-color, 10%);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 5px rgba($accent-color, 0.2);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+.task-column {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px $card-shadow;
+  padding: 1.5rem !important;
+  
+  h4 {
+    color: $text-secondary;
+    font-weight: 500;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid $light-gray;
+  }
+
+  .task-list {
+    min-height: 300px;
+  }
+}
+
+.task-card {
+  background: white;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba($card-shadow, 0.1);
+  }
+
+  .card-body {
+    padding: 1.25rem;
+  }
+
+  .card-title {
+    color: $primary-color;
+    font-weight: 500;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid $border-color;
+  }
+
+  .card-text {
+    color: $text-secondary;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  .card-subtitle {
+    color: $accent-color !important;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    
+    &:before {
+      content: "👤";
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+// Status-specific styling
+.task-column {
+  &:nth-child(1) h4 { // To Do
+    border-bottom-color: $primary-color;
+  }
+  
+  &:nth-child(2) h4 { // In Progress
+    border-bottom-color: $accent-color;
+  }
+  
+  &:nth-child(3) h4 { // Done
+    border-bottom-color: $success-color;
+  }
+}

@@ -14,14 +14,9 @@ const statuses = ["To Do", "In Progress", "Done"];
 
 function TaskBoard({ tasks, setTasks }: TaskBoardProps) {
   const onDragEnd = (result: DropResult) => {
-    console.log("Drag Result:", result);
     const { destination, source, draggableId } = result;
 
-    if (!destination) return;
-    if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
-    ) {
+    if (!destination || (destination.droppableId === source.droppableId && destination.index === source.index)) {
       return;
     }
 
@@ -31,36 +26,14 @@ function TaskBoard({ tasks, setTasks }: TaskBoardProps) {
       return;
     }
 
-    const newStatus = statuses.includes(
-      destination.droppableId as TaskParams["status"]
-    )
-      ? (destination.droppableId as TaskParams["status"])
-      : draggedTask.status;
-
-    const updatedTask: TaskParams = { ...draggedTask, status: newStatus };
-
-    const newTasks = tasks.filter((task) => task.id !== draggableId);
-    const destinationTasks = newTasks.filter(
-      (task) => task.status === newStatus
+    // Task'ı yeni statuse taşı
+    const newTasks = tasks.map(task => 
+      task.id === draggableId 
+        ? { ...task, status: destination.droppableId }
+        : task
     );
-
-    let insertAt = 0;
-    if (destination.index === 0) {
-      const firstTaskInDestination = newTasks.find(
-        (task) => task.status === newStatus
-      );
-      insertAt = firstTaskInDestination
-        ? newTasks.indexOf(firstTaskInDestination)
-        : newTasks.length;
-    } else {
-      const prevTaskInDestination = destinationTasks[destination.index - 1];
-      insertAt = prevTaskInDestination
-        ? newTasks.indexOf(prevTaskInDestination) + 1
-        : newTasks.length;
-    }
-
-    newTasks.splice(insertAt, 0, updatedTask);
-    setTasks([...newTasks]);
+    
+    setTasks(newTasks);
   };
 
   return (

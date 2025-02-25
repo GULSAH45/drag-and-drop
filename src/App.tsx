@@ -3,7 +3,8 @@ import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { TaskParams } from "./types/Task";
 import TaskBoard from "./TaskBoard";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
+import { Form, Button, Container } from "react-bootstrap";
 
 const softwareDevelopmentTasks: TaskParams[] = [
   {
@@ -21,7 +22,7 @@ const softwareDevelopmentTasks: TaskParams[] = [
   {
     title: "Bug Fixing",
     description: "Resolve layout issues on mobile view",
-    status: "In Review",
+    status: "In Progress",
     assignee: "Charlie",
   },
   {
@@ -45,7 +46,7 @@ const softwareDevelopmentTasks: TaskParams[] = [
   {
     title: "UI Testing",
     description: "Test UI components for usability",
-    status: "In Review",
+    status: "To Do",
     assignee: "Grace",
   },
   {
@@ -78,10 +79,65 @@ softwareDevelopmentTasks.forEach((task) => {
 
 function App() {
   const [tasks, setTasks] = useState<TaskParams[]>(initialTask);
+  const [newTask, setNewTask] = useState({
+    title: "",
+    description: "",
+    assignee: "",
+  });
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const task: TaskParams = {
+      ...newTask,
+      id: nanoid(),
+      status: "To Do",
+    };
+    setTasks([...tasks, task]);
+    setNewTask({ title: "", description: "", assignee: "" });
+  };
+
   return (
     <>
       <h1 className="text-center mt-5">Task Manager</h1>
-      <TaskBoard key={nanoid()} tasks={tasks} setTasks={setTasks} />
+      <Container className="mb-4">
+        <Form onSubmit={handleSubmit} className="newTaskInput">
+          <Form.Group className="mb-3">
+            <Form.Label>Task Title</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter task title"
+              value={newTask.title}
+              onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={2}
+              placeholder="Enter task description"
+              value={newTask.description}
+              onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Assignee</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter assignee name"
+              value={newTask.assignee}
+              onChange={(e) => setNewTask({ ...newTask, assignee: e.target.value })}
+              required
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Add Task
+          </Button>
+        </Form>
+      </Container>
+      <TaskBoard tasks={tasks} setTasks={setTasks} />
     </>
   );
 }
