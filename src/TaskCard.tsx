@@ -9,24 +9,24 @@ interface TaskCardProps {
 
 function TaskCard({ task, index }: TaskCardProps) {
   return (
-    <>
-      <Draggable draggableId={String(task.id)} index={index}>
-        {(provided) => (
-          <Card
-            style={{ width: "18rem" }}
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-          >
-            <Card.Body>
-              <Card.Title>{task.title}</Card.Title>
-              <Card.Text>{task.description}</Card.Text>
-              <Card.Subtitle>Atanan: {task.assignee}</Card.Subtitle>
-            </Card.Body>
-          </Card>
-        )}
-      </Draggable>
-    </>
+    <Draggable draggableId={String(task.id)} index={index}>
+      {(provided) => (
+        <Card
+          className="task-card mb-3"
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <Card.Body>
+            <Card.Title className="border-bottom pb-2">{task.title}</Card.Title>
+            <Card.Text className="task-description">{task.description}</Card.Text>
+            <Card.Subtitle className="text-muted mt-2">
+              Atanan: {task.assignee}
+            </Card.Subtitle>
+          </Card.Body>
+        </Card>
+      )}
+    </Draggable>
   );
 }
 

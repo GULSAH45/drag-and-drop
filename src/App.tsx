@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import "./App.css";
+import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { TaskParams } from "./types/Task";
 import TaskBoard from "./TaskBoard";
@@ -80,7 +80,7 @@ function App() {
   const [tasks, setTasks] = useState<TaskParams[]>(initialTask);
   return (
     <>
-      <h1 className="text-center">Task Manager</h1>
+      <h1 className="text-center mt-5">Task Manager</h1>
       <TaskBoard key={nanoid()} tasks={tasks} setTasks={setTasks} />
     </>
   );

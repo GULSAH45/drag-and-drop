@@ -37,7 +37,7 @@ function TaskBoard({ tasks, setTasks }: TaskBoardProps) {
       ? (destination.droppableId as TaskParams["status"])
       : draggedTask.status;
 
-    const updatedTask: Task = { ...draggedTask, status: newStatus };
+    const updatedTask: TaskParams = { ...draggedTask, status: newStatus };
 
     const newTasks = tasks.filter((task) => task.id !== draggableId);
     const destinationTasks = newTasks.filter(
