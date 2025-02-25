@@ -77,11 +77,11 @@ softwareDevelopmentTasks.forEach((task) => {
 });
 
 function App() {
-  const [task, setTask] = useState<TaskParams[]>(initialTask);
+  const [tasks, setTasks] = useState<TaskParams[]>(initialTask);
   return (
     <>
       <h1 className="text-center">Task Manager</h1>
-      <TaskBoard key={nanoid()} tasks={task} setTask={setTask} />
+      <TaskBoard key={nanoid()} tasks={tasks} setTasks={setTasks} />
     </>
   );
 }

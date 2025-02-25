@@ -10,8 +10,8 @@ interface TaskColumnProps {
 
 function TaskColumn({ status, tasks }: TaskColumnProps) {
   return (
-    <Row className=" justify-content-center">
-      <Col md={4} sm={6}>
+    <Row className=" justify-content-between">
+      <Col className="task-column" md={4} sm={6}>
         <h4>{status}</h4>
         <Droppable droppableId={status}>
           {(provided) => (
