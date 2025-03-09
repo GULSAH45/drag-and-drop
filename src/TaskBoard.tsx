@@ -1,5 +1,4 @@
 import React from "react";
-
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import { Container, Row } from "react-bootstrap";
 import TaskColumn from "./TaskColumn";
@@ -26,13 +25,23 @@ function TaskBoard({ tasks, setTasks }: TaskBoardProps) {
       return;
     }
 
-    // Task'ı yeni statuse taşı
-    const newTasks = tasks.map(task => 
-      task.id === draggableId 
-        ? { ...task, status: destination.droppableId }
-        : task
+    // Görevi yeni statüye taşı
+    let newTasks = tasks.map((task) =>
+      task.id === draggableId ? { ...task, status: destination.droppableId } : task
     );
-    
+
+    // Aynı statüdeyse sıralamayı güncelle
+    if (source.droppableId === destination.droppableId) {
+      const tasksInStatus = newTasks.filter((task) => task.status === source.droppableId);
+      const movedTask = tasksInStatus.splice(source.index, 1)[0];
+      tasksInStatus.splice(destination.index, 0, movedTask);
+
+      // Yeni sıralamayı güncelle
+      newTasks = newTasks.map((task) =>
+        task.status === source.droppableId ? tasksInStatus.find((t) => t.id === task.id) || task : task
+      );
+    }
+
     setTasks(newTasks);
   };
 
